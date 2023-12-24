@@ -87,10 +87,10 @@ if type(getinfo) ~= 'function' then
     end
 end
 
-local UI = urlLoad("https://raw.githubusercontent.com/wally-rblx/LinoriaLib/main/Library.lua")
-local themeManager = urlLoad("https://raw.githubusercontent.com/wally-rblx/LinoriaLib/main/addons/ThemeManager.lua")
+local UI = urlLoad("https://raw.githubusercontent.com/CanalAmigos/FunkyFriday/main/UI")
+local themeManager = urlLoad("https://raw.githubusercontent.com/CanalAmigos/FunkyFriday/main/Themes")
 
-local metadata = urlLoad("https://raw.githubusercontent.com/wally-rblx/funky-friday-autoplay/main/metadata.lua")
+local metadata = urlLoad("https://raw.githubusercontent.com/CanalAmigos/FunkyFriday/main/Metadata")
 local httpService = game:GetService('HttpService')
 
 local framework, scrollHandler, network
