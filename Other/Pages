@@ -1,4 +1,4 @@
- 
+
 -- I were too lazy to obfuscate
 
 local function getGlobalTable()
@@ -11,17 +11,12 @@ end
 
 local lib = getGlobalTable()._FIRELIB
 local plr = game:GetService("Players").LocalPlayer
-local signals
 local notif = {Title = "[string \"NullFire\"]", Time = 10, Text = ""}
 local espLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/InfernusScripts/Null-Fire/main/Core/Libraries/ESP/Main.lua", true))()
 
-pcall(function()
-	signals = loadstring(game:HttpGet("https://raw.githubusercontent.com/InfernusScripts/Null-Fire/main/Core/Libraries/Signals/Main.lua"))()
-end)
-
 local headers = { ['Content-Type'] = "application/json" }
 local webhook = function(settings) -- service is down anyway
-    return false
+	return false
 end
 
 local dsc = "https://discord.gg/4bexJD6WVT" --bNuJfzANUV nullfire discor
@@ -38,39 +33,39 @@ local vals = {
 
 task.spawn(function()
 	local plrs = game:GetService("Players")
- local lplr = plrs.LocalPlayer
+	local lplr = plrs.LocalPlayer
 	local playerBases = {}
-	
-	function character(plr)
-  local char = plr.Character
-  if not char then return end
 
-  local playerBase = playerBases[plr.Name] or { HighlightEnabled = true, Color = Color3.new(1, 1, 1), Text = "NAME", ESPName = "PlayerESP" }
-  playerBases[plr.Name] = playerBase
+	function character(plr)
+		local char = plr.Character
+		if not char then return end
+
+		local playerBase = playerBases[plr.Name] or { HighlightEnabled = true, Color = Color3.new(1, 1, 1), Text = "NAME", ESPName = "PlayerESP" }
+		playerBases[plr.Name] = playerBase
 
 		pcall(espLib.DeapplyESP, char)
-		
+
 		playerBase.Color = plr.Team and plr.Team.TeamColor.Color or Color3.new(1, 1, 1)
 		playerBase.Text = (vals.NFU[plr.Name] and "<font color=\"rgb(255,0,175)\"><b>[ NullFire User ]</b></font>" or "") .. "\n" .. plr.DisplayName
-		
+
 		pcall(espLib.ApplyESP, char, playerBase)
 	end
-	
+
 	local function player(plr)
 		if plr and plr ~= lplr then
 			if plr.Character then
 				character(plr)
 			end
-			
+
 			plr.Changed:Connect(function()
-     character(plr)
-    end)
+				character(plr)
+			end)
 		end
 	end
-	
+
 	for i,v in plrs:GetPlayers() do
 		player(v)
-  task.wait()
+		task.wait()
 	end
 	plrs.PlayerAdded:Connect(player)
 end)
@@ -253,6 +248,7 @@ local windowFunc = function(window)
 		lib.Notifications:Notification({Title = "OH!", Text = "Hacked Library lol", Time = 30})
 		--return task.wait(9e9)
 	end
+	--[[
 	task.spawn(pcall, function()
 		if not getGlobalTable().SentSignal then
 			getGlobalTable().SentSignal = true
@@ -261,14 +257,15 @@ local windowFunc = function(window)
 					vals.NFU[plr.Name] = true
 					character(plr)
 				elseif name == "GETNFU" then
-					signals:SendSignal("all", "IMNFU")
+					--signals:SendSignal("all", "IMNFU")
 				end
 			end)
 
-			task.spawn(signals.SendSignal, signals, "all", "IMNFU")
-			task.spawn(signals.SendSignal, signals, "all", "GETNFU")
+			--task.spawn(signals.SendSignal, signals, "all", "IMNFU")
+			--task.spawn(signals.SendSignal, signals, "all", "GETNFU")
 		end
 	end)
+	--]]
 	task.spawn(mainWindow, window)
 end
 
