@@ -248,7 +248,7 @@ local windowFunc = function(window)
 		lib.Notifications:Notification({Title = "OH!", Text = "Hacked Library lol", Time = 30})
 		--return task.wait(9e9)
 	end
-	--[[
+	--]]
 	task.spawn(pcall, function()
 		if not getGlobalTable().SentSignal then
 			getGlobalTable().SentSignal = true
@@ -262,7 +262,7 @@ local windowFunc = function(window)
 			end)
 
 			--task.spawn(signals.SendSignal, signals, "all", "IMNFU")
-			--task.spawn(signals.SendSignal, signals, "all", "GETNFU")
+			task.spawn(signals.SendSignal, signals, "all", "GETNFU")
 		end
 	end)
 	--]]
